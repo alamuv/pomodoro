@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const server = require('../server/server.js');
 const request = require('request');
 
-const apiUrl = '127.0.0.1:3000';
+const apiUrl = 'http://127.0.0.1:3000';
 
 // Dummy data for tests
 let task = {
@@ -36,14 +36,14 @@ describe('Basic server functionality', () => {
     request({
       method: 'POST',
       uri: `${apiUrl}/api/tasks`,
-      body: {},
+      json: {},
     }, (error, response, body) => {
       if (error) {
         // Auto-fail test if error
+        console.log(error);
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(400);
       expect(body.status).to.equal('Invalid task object');
       done();
@@ -54,14 +54,13 @@ describe('Basic server functionality', () => {
     request({
       method: 'POST',
       uri: `${apiUrl}/api/tasks`,
-      body: {},
+      json: task,
     }, (error, response, body) => {
       if (error) {
         // Auto-fail test if error
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(201);
       expect(body.status).to.equal('Success');
       taskId = body.id;
@@ -79,7 +78,6 @@ describe('Basic server functionality', () => {
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(200);
       expect(body.length).to.equal(1);
       expect(body[0].description).to.equal('Laundry');
@@ -92,14 +90,13 @@ describe('Basic server functionality', () => {
     request({
       method: 'PUT',
       uri: `${apiUrl}/api/tasks/12345`,
-      body: updateTask,
+      json: updateTask,
     }, (error, response, body) => {
       if (error) {
         // Auto-fail test if error
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(400);
       expect(body.status).to.equal('Invalid id');
     })
@@ -109,14 +106,13 @@ describe('Basic server functionality', () => {
     request({
       method: 'PUT',
       uri: `${apiUrl}/api/tasks/${taskId}`,
-      body: {},
+      json: {},
     }, (error, response, body) => {
       if (error) {
         // Auto-fail test if error
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(400);
       expect(body.status).to.equal('Invalid task object');
     })
@@ -126,14 +122,13 @@ describe('Basic server functionality', () => {
     request({
       method: 'PUT',
       uri: `${apiUrl}/api/tasks/${taskId}`,
-      body: updateTask,
+      json: updateTask,
     }, (error, response, body) => {
       if (error) {
         // Auto-fail test if error
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(200);
       expect(body.status).to.equal('Success');
       expect(body.id).to.equal(taskId);
@@ -150,7 +145,6 @@ describe('Basic server functionality', () => {
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(200);
       expect(body.length).to.equal(1);
       expect(body[0].description).to.equal('Laundry');
@@ -169,7 +163,6 @@ describe('Basic server functionality', () => {
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(400);
       expect(body.status).to.equal('Invalid task id');
     })
@@ -185,10 +178,40 @@ describe('Basic server functionality', () => {
         expect(true).to.equal(false);
         done();
       }
-      body = JSON.parse(body);
       expect(response.statusCode).to.equal(200);
       expect(body.status).to.equal('Success');
     })
+  });
+
+  it('GET to /api/tasks should not return deleted tasks', (done) => {
+    request({
+      method: 'GET',
+      uri: `${apiUrl}/api/tasks`
+    }, (error, response, body) => {
+      if (error) {
+        // Auto-fail test if error
+        expect(true).to.equal(false);
+        done();
+      }
+      expect(response.statusCode).to.equal(200);
+      expect(body.length).to.equal(0);
+      done();
+    });
+  });
+
+  it('should respond with 400 Bad Request for invalid endpoints', (done) => {
+    request({
+      method: 'GET',
+      uri: `${apiUrl}/foo/bar`
+    }, (error, response, body) => {
+      if (error) {
+        // Auto-fail test if error
+        expect(true).to.equal(false);
+        done();
+      }
+      expect(response.statusCode).to.equal(400);
+      done();
+    });
   });
 
 })
