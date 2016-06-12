@@ -1,6 +1,9 @@
+const mongoose = require('./config/dbConfig.js');
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('./config/config');
+const config = require('./config/serverConfig');
+
 const router = require('./routers/router.js');
 
 const app = express();
