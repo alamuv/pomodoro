@@ -8,6 +8,8 @@ const router = require('./routers/router.js');
 
 const app = express();
 
+app.use('/', express.static('client'));
+
 app.use(bodyParser.json());
 
 app.use(router);
