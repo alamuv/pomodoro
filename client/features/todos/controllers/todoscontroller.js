@@ -25,7 +25,7 @@ angular.module('todos', [])
     {
       id: 4,
       name: 'Do stuff',
-      description: 'Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff Stuff',
+      description: 'Stuff Stuff Stuff Stuff Stuff Stuff Stuff',
       pomodoros: 2
     }
   ];
@@ -34,7 +34,7 @@ angular.module('todos', [])
   $scope.currentTask;
 
   // Time left for current pomodoro
-  const taskTime = .15;
+  const taskTime = 25;
   $scope.timeLeft = taskTime;
   // String display of minutes left
   $scope.minutes = '25';
@@ -43,7 +43,7 @@ angular.module('todos', [])
   // Toggle to start/pause timer
   $scope.isPaused = false;
   // Denotes whether currently in a break
-  const breakTime = .1;
+  const breakTime = 5;
   $scope.isBreak = false;
 
   // Add/remove pomodoros based on user interaction

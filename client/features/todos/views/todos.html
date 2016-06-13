@@ -1,81 +1,82 @@
 <div class="row">
-  <div class="col-md-4 col-md-offset-2">
+  <div class="col-sm-5 tasks-container col-sm-offset-1">
 
     <div class="row">
-      <div class="col-md-6">
-        <h2>My Tasks</h2>
+      <div class="col-sm-6">
+        <h1 class="section-header">My Tasks</h1>
       </div>
-      <div class="col-md-3 col-md-offset-3">
-        <div class="btn btn-success">
+      <div class="col-sm-4 col-sm-offset-2">
+        <div class="btn btn-success btn-add-task">
           Add Task
         </div>
       </div>
     </div>
 
-    <div class="row task-tile" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)">
-      <div class="col-md-8">
-        <div class="col-md-12">
-          <h3>{{task.name}}</h3>
-        </div>
-        <div class="col-md-12">
-          <h5>{{task.description}}</h5>
-        </div>
+    <div class="row task tile" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)">
+      <div class="col-sm-8">
+        <h3>{{task.name}}</h3>
+        <h6>{{task.description}}</h6>
       </div>
-      <div class="col-md-4">
+      <div class="col-sm-4">
 
         <div class="row">
-          <div class="col-md-3 col-md-offset-6">
+          <div class="col-sm-2 col-sm-offset-6 no-padding">
             <h6>{{task.pomodoros}}x</h6>
           </div>
-          <div class="col-md-3 pomodoro">
+          <div class="col-sm-4 no-padding">
             <img src="../../../assets/img/pomodoro.png" height="30px"/>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-3 col-md-offset-6 plus-minus-container">
-            <h6 class="plus-minus" ng-click="addPomodoros(task, $event)">+</h6>
+          <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-success" ng-click="addPomodoros(task, $event)">
+            +
           </div>
-          <div class="col-md-3 plus-minus-container">
-            <h6 class="plus-minus" ng-click="subtractPomodoros(task, $event)">-</h6>
+          <div class="col-sm-1 no-padding btn btn-danger" ng-click="subtractPomodoros(task, $event)">
+            -
           </div>
         </div>
       </div>
     </div>
 
   </div>
-  <div class="col-md-4" ng-switch="currentTask">
-    
-    <div class = row ng-switch-when="undefined">
-      <h2>Please select a task</h2>
+  <div class="col-sm-4 timer-container" ng-switch="currentTask">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="section-header">Current Task</h1>
+      </div>
     </div>
-    <div class="row" ng-switch-default>
-
-      <div class="col-md-6">
-        <h2>{{currentTask.name}}</h2>
+    <div class="row" ng-switch-when="undefined">
+      <div class="col-sm-12">
+        <h2>Please select a task</h2>
       </div>
+    </div>
 
-      <div class="col-md-3">
-        <h2>{{currentTask.pomodoros}}</h2>
-      </div>
-      <div class="col-md-3">
-        <img src="../../../assets/img/pomodoro.png" height="30px"/>
-      </div>
+    <div ng-switch-default>
 
-      <div class="col-md-12">
-        <h4>{{currentTask.description}}</h4>
+      <div class="row task">
+        <div class="col-sm-8">
+          <h3>{{currentTask.name}}</h3>
+          <h6>{{currentTask.description}}</h6>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm-2 col-sm-offset-6 no-padding">
+              <h6>{{currentTask.pomodoros}}x</h6>
+            </div>
+            <div class="col-sm-4 no-padding">
+              <img src="../../../assets/img/pomodoro.png" height="30px"/>
+            </div>
+          </div>
       </div>
-
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-sm-12 timer">
         <h1>{{minutes}}:{{seconds}}</h1>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-3 col-md-offset-3 btn btn-success" ng-click="toggleTimer()">
+      <div class="col-sm-4 col-sm-offset-4 btn btn-success" ng-click="toggleTimer()">
         {{ isPaused ? 'Start' : 'Pause'}}
       </div>
     </div>

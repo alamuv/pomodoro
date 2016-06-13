@@ -1,0 +1,31 @@
+.section-header {
+  color: #F4998D;
+}
+
+.btn-add-task {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.task {
+  margin-top: 10px;
+}
+
+.tile {
+  box-shadow: 2px 2px 5px #C9ADA1;
+}
+.tile:hover {
+  background-color: #EAE0CC;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.btn {
+  border-radius: 0px;
+}
+
+.timer {
+  text-align: center;
+}
