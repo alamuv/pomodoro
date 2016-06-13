@@ -34,14 +34,16 @@ angular.module('todos', [])
   $scope.currentTask;
 
   // Time left for current pomodoro
-  $scope.timeLeft = 25;
+  const taskTime = .15;
+  $scope.timeLeft = taskTime;
   // String display of minutes left
   $scope.minutes = '25';
   // String display of second sleft
   $scope.seconds = '00';
   // Toggle to start/pause timer
-  $scope.paused = false;
+  $scope.isPaused = false;
   // Denotes whether currently in a break
+  const breakTime = .1;
   $scope.isBreak = false;
 
   // Add/remove pomodoros based on user interaction
@@ -69,42 +71,57 @@ angular.module('todos', [])
     });
 
     // Resets the timer
-    $scope.timeLeft = 25;
-    $scope.paused = true;
-    $scope.minsToString();
-    $scope.secsToString();
-    $scope.decrementTimer();
+    $scope.timeLeft = taskTime;
+    $scope.isPaused = true;
+    minsToString();
+    secsToString();
+    decrementTimer();
   };
 
   // Toggles the timer on/off
   $scope.toggleTimer = () => {
-    $scope.paused = !$scope.paused;
-    $scope.decrementTimer();
+    $scope.isPaused = !$scope.isPaused;
+    decrementTimer();
   };
   // Decrements the timer by 1 second
-  $scope.decrementTimer = () => {
-    if (!$scope.paused) {
+  const decrementTimer = () => {
+    if (!$scope.isPaused) {
       $scope.timeLeft = Math.max($scope.timeLeft - 1 / 60, 0);
       // Updates the minutes string
-      $scope.minsToString();
+      minsToString();
       // Updates the seconds string
-      $scope.secsToString();
-      // If at 0 seconds, reduces the number of pomodoros remaining
-      if ($scope.timeLeft === 0) {
+      secsToString();
+      // If last pomodoro, delete task
+      if ($scope.timeLeft === 0 && $scope.currentTask.pomodoros === 1 && $scope.isBreak === false) {
+        $scope.currentTask = undefined;
+        $scope.isPaused = true;
+      } else if ($scope.timeLeft === 0 && $scope.isBreak === false) { // If not the last pomodoro, starts break timer
+        $scope.timeLeft = breakTime;
+        minsToString();
+        secsToString();
+
         $scope.currentTask.pomodoros--;
-        $scope.paused = true;
-      } else {
-        $timeout($scope.decrementTimer, 1000);
+
+        $scope.isBreak = true;
+        decrementTimer();
+      } else if ($scope.timeLeft === 0 && $scope.isBreak === true) { // If end of break, starts timer for next pomodoro
+        $scope.timeLeft = taskTime;
+        minsToString();
+        secsToString();
+        $scope.isBreak = false;
+        decrementTimer();
+      } else if (!$scope.isPaused) {
+        $timeout(decrementTimer, 1000);
       }
     }
   };
   // Converts minutes to a string
-  $scope.minsToString = () => {
+  const minsToString = () => {
     const mins = Math.floor($scope.timeLeft).toString().length > 1 ? Math.floor($scope.timeLeft).toString() : '0' + Math.floor($scope.timeLeft).toString();
     $scope.minutes = mins;
   };
   // Converts seconds to a string
-  $scope.secsToString = () => {
+  const secsToString = () => {
     let secs = Math.floor(($scope.timeLeft - parseInt($scope.minutes)) * 60).toString();
     if (secs.length < 2) secs = '0' + secs;
     $scope.seconds = secs;

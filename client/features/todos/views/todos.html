@@ -6,13 +6,13 @@
         <h2>My Tasks</h2>
       </div>
       <div class="col-md-3 col-md-offset-3">
-        <div class="btn btn-info">
+        <div class="btn btn-success">
           Add Task
         </div>
       </div>
     </div>
 
-    <div class="row" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)">
+    <div class="row task-tile" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)">
       <div class="col-md-8">
         <div class="col-md-12">
           <h3>{{task.name}}</h3>
@@ -24,29 +24,32 @@
       <div class="col-md-4">
 
         <div class="row">
-          <div class="col-md-3 col-md-offset-3">
+          <div class="col-md-3 col-md-offset-6">
             <h6>{{task.pomodoros}}x</h6>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3 pomodoro">
             <img src="../../../assets/img/pomodoro.png" height="30px"/>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-3 col-md-offset-6">
-            <h6 ng-click="addPomodoros(task, $event)">+</h6>
+          <div class="col-md-3 col-md-offset-6 plus-minus-container">
+            <h6 class="plus-minus" ng-click="addPomodoros(task, $event)">+</h6>
           </div>
-          <div class="col-md-3">
-            <h6 ng-click="subtractPomodoros(task, $event)">-</h6>
+          <div class="col-md-3 plus-minus-container">
+            <h6 class="plus-minus" ng-click="subtractPomodoros(task, $event)">-</h6>
           </div>
         </div>
       </div>
     </div>
 
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" ng-switch="currentTask">
     
-    <div class="row">
+    <div class = row ng-switch-when="undefined">
+      <h2>Please select a task</h2>
+    </div>
+    <div class="row" ng-switch-default>
 
       <div class="col-md-6">
         <h2>{{currentTask.name}}</h2>
@@ -72,8 +75,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-3 col-md-offset-3 btn btn-info" ng-click="toggleTimer()">
-        {{ paused ? 'Start' : 'Pause'}}
+      <div class="col-md-3 col-md-offset-3 btn btn-success" ng-click="toggleTimer()">
+        {{ isPaused ? 'Start' : 'Pause'}}
       </div>
     </div>
   </div>
