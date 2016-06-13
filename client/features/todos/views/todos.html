@@ -5,7 +5,7 @@
       <div class="col-sm-6">
         <h1 class="section-header">My Tasks</h1>
       </div>
-      <div class="col-sm-4 col-sm-offset-2">
+      <div class="col-sm-3 col-sm-offset-3">
         <div class="btn btn-success btn-add-task">
           Add Task
         </div>
@@ -40,7 +40,7 @@
     </div>
 
   </div>
-  <div class="col-sm-4 timer-container" ng-switch="currentTask">
+  <div class="col-sm-5 timer-container" ng-switch="currentTask">
     <div class="row">
       <div class="col-sm-12">
         <h1 class="section-header">Current Task</h1>
@@ -66,6 +66,14 @@
             </div>
             <div class="col-sm-4 no-padding">
               <img src="../../../assets/img/pomodoro.png" height="30px"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-success" ng-click="addPomodoros(currentTask, $event)">
+              +
+            </div>
+            <div class="col-sm-1 no-padding btn btn-danger" ng-click="subtractPomodoros(currentTask, $event)">
+              -
             </div>
           </div>
       </div>
