@@ -1,0 +1,24 @@
+{
+  "name": "pomodoro",
+  "description": "",
+  "main": "server/server.js",
+  "authors": [
+    "Rahim <rahim.dharssi@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/rahimftd/pomodoro",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "^1.5.6",
+    "angular": "^1.5.6",
+    "bootstrap": "^3.3.6"
+  }
+}

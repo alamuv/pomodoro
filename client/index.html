@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html ng-app="pomodoro">
+<head>
+  <title>Pomodoro</title>
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+  <div class="container" ng-view>
+  </div>
+  <!-- External dependencies -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+
+  <!-- Angular controllers -->
+  <script src="features/login/controllers/logincontroller.js"></script>
+  <script src="features/todos/controllers/todoscontroller.js"></script>
+  <!-- App -->
+  <script src="app.js"></script>
+</body>
+</html>
