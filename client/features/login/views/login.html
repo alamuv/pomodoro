@@ -1,3 +1,31 @@
-<div>
-  Login
+<div class="row banner">
+  <div class="col-sm-12">
+    <h1>Welcome to Pomodoro</h1>
+    <h3>Please signup or login below...</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="row new-task-field">
+      <div class="col-sm-3">
+        <h5>Username:</h5>
+      </div>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" placeholder="Username" ng-model="username">
+      </div>
+    </div>
+    <div class="row new-task-field">
+      <div class="col-sm-3">
+        <h5>Password:</h5>
+      </div>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" placeholder="Password" ng-model="password">
+      </div>
+    </div>
+    <div class="row new-task-field">
+      <div class="col-sm-3 col-sm-offset-9">
+        <input type="submit" class="btn btn-danger" value="Submit" ng-click="authorize()">
+      </div>
+    </div>
+  </div>
 </div>

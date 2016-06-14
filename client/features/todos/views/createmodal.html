@@ -1,6 +1,7 @@
 <div class="row new-task" ng-show="isCreatingTask">
   <div class="col-sm-12">
     <div class="row">
+      <img class="modal-exit" src="../../../assets/img/trash.png" ng-click="toggleIsCreatingTask()"/>
       <div class="col-sm-12">
         <h2 class="new-task-title">Create new task</h2>
       </div>
@@ -19,7 +20,7 @@
         Description:
       </div>
       <div class="col-sm-9">
-        <textarea class="form-control" rows="1" placeholder="Description" resize="none" maxlength="30" ng-model="newTask.description"></textarea>
+        <textarea class="form-control" rows="1" placeholder="Description" resize="none" maxlength="50" ng-model="newTask.description"></textarea>
       </div>
     </div>
 

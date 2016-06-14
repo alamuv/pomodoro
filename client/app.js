@@ -2,6 +2,9 @@ angular.module('pomodoro', [
   'login',
   'todos',
   'ngRoute',
+  'http',
+  'auth',
+  'ngCookies'
 ])
 
 .config(function ($routeProvider) {
@@ -17,4 +20,19 @@ angular.module('pomodoro', [
     .otherwise({
       redirectTo: '/'
     });
+})
+.run(($rootScope, $location, $http) => {
+  // Redirects to login page if there is no session id
+  $rootScope.$on('$routeChangeStart', (next, event, current) => {
+    $http.get('/checksession')
+      .then((response) => {
+        if(response.status === 200) {
+          $location.path('/pomodoros');
+        } else {
+          $location.path('/');
+        }
+      }, (error) => {
+        $location.path('/');
+      })
+  });
 });
