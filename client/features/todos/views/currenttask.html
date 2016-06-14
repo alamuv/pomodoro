@@ -1,0 +1,51 @@
+<div class="col-sm-5" ng-switch="currentTask">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="section-header">Current Task</h1>
+    </div>
+  </div>
+  <div class="row" ng-switch-when="undefined">
+    <div class="col-sm-12">
+      <h2>Please select a task</h2>
+    </div>
+  </div>
+
+  <div ng-switch-default>
+
+    <div class="row task">
+      <div class="col-sm-8">
+        <h3>{{currentTask.name}}</h3>
+        <h6>{{currentTask.description}}</h6>
+      </div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-6 no-padding">
+            <h6>{{currentTask.pomodoros}}x</h6>
+          </div>
+          <div class="col-sm-4 no-padding">
+            <img src="../../../assets/img/pomodoro.png" height="30px"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-danger" ng-click="subtractPomodoros(currentTask, $event)">
+            -
+          </div>
+          <div class="col-sm-1 no-padding btn btn-success" ng-click="addPomodoros(currentTask, $event)">
+            +
+          </div>
+        </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12 timer">
+      <p>{{minutes}}:{{seconds}}</p>
+    </div>
+
+    <div class="col-sm-4 col-sm-offset-4 btn btn-success" ng-click="toggleTimer()">
+      {{ isPaused ? 'Start' : 'Pause'}}
+    </div>
+  </div>
+
+  </div>
+</div>

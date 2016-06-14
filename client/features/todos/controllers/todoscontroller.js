@@ -1,6 +1,6 @@
-angular.module('todos', [])
+const todos = angular.module('todos', []);
 
-.controller('todosController', function($scope, $timeout) {
+todos.controller('todosController', function($scope, $timeout) {
 
   // Stores tasks
   $scope.tasks = [
@@ -33,6 +33,9 @@ angular.module('todos', [])
   // Stores task that is currently being worked on
   $scope.currentTask;
 
+  // Determines whether create task modal should be shown
+  $scope.isCreatingTask = false;
+
   // Time left for current pomodoro
   const taskTime = 25;
   $scope.timeLeft = taskTime;
@@ -45,6 +48,13 @@ angular.module('todos', [])
   // Denotes whether currently in a break
   const breakTime = 5;
   $scope.isBreak = false;
+
+  // Store newly created task
+  $scope.newTask = {
+    name: '',
+    description: '',
+    pomodoros: 1,
+  }
 
   // Add/remove pomodoros based on user interaction
   $scope.addPomodoros = (task, $event) => {
@@ -127,9 +137,20 @@ angular.module('todos', [])
     $scope.seconds = secs;
   };
 
+  $scope.toggleIsCreatingTask = () => {
+    $scope.isCreatingTask = !$scope.isCreatingTask;
+  }
+
+  $scope.submitTask = () => {
+    $scope.tasks.push($scope.newTask);
+    $scope.toggleIsCreatingTask();
+  }
+
   // Stages the initial task
   $scope.init = () => {
     $scope.stageTask($scope.tasks[0]);
   };
   $scope.init();
 });
+
+module.exports = todos;

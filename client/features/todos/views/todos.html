@@ -1,92 +1,9 @@
 <div class="row">
-  <div class="col-sm-5 tasks-container col-sm-offset-1">
-
-    <div class="row">
-      <div class="col-sm-6">
-        <h1 class="section-header">My Tasks</h1>
-      </div>
-      <div class="col-sm-3 col-sm-offset-3">
-        <div class="btn btn-success btn-add-task">
-          Add Task
-        </div>
-      </div>
-    </div>
-
-    <div class="row task tile" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)">
-      <div class="col-sm-8">
-        <h3>{{task.name}}</h3>
-        <h6>{{task.description}}</h6>
-      </div>
-      <div class="col-sm-4">
-
-        <div class="row">
-          <div class="col-sm-2 col-sm-offset-6 no-padding">
-            <h6>{{task.pomodoros}}x</h6>
-          </div>
-          <div class="col-sm-4 no-padding">
-            <img src="../../../assets/img/pomodoro.png" height="30px"/>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-success" ng-click="addPomodoros(task, $event)">
-            +
-          </div>
-          <div class="col-sm-1 no-padding btn btn-danger" ng-click="subtractPomodoros(task, $event)">
-            -
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="col-sm-5 timer-container" ng-switch="currentTask">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 class="section-header">Current Task</h1>
-      </div>
-    </div>
-    <div class="row" ng-switch-when="undefined">
-      <div class="col-sm-12">
-        <h2>Please select a task</h2>
-      </div>
-    </div>
-
-    <div ng-switch-default>
-
-      <div class="row task">
-        <div class="col-sm-8">
-          <h3>{{currentTask.name}}</h3>
-          <h6>{{currentTask.description}}</h6>
-        </div>
-        <div class="col-sm-4">
-          <div class="row">
-            <div class="col-sm-2 col-sm-offset-6 no-padding">
-              <h6>{{currentTask.pomodoros}}x</h6>
-            </div>
-            <div class="col-sm-4 no-padding">
-              <img src="../../../assets/img/pomodoro.png" height="30px"/>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-success" ng-click="addPomodoros(currentTask, $event)">
-              +
-            </div>
-            <div class="col-sm-1 no-padding btn btn-danger" ng-click="subtractPomodoros(currentTask, $event)">
-              -
-            </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12 timer">
-        <h1>{{minutes}}:{{seconds}}</h1>
-      </div>
-
-      <div class="col-sm-4 col-sm-offset-4 btn btn-success" ng-click="toggleTimer()">
-        {{ isPaused ? 'Start' : 'Pause'}}
-      </div>
-    </div>
-  </div>
+  <!-- Task list view -->
+  <ng-include src="'features/todos/views/tasklist.html'"></ng-include>
+  <!-- Current task/timer view -->
+  <ng-include src="'features/todos/views/currenttask.html'"></ng-include>
 </div>
+
+<!-- New task creation modal -->
+<ng-include src="'features/todos/views/createmodal.html'"></ng-include>

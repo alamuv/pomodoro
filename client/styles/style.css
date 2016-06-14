@@ -1,3 +1,9 @@
+hr {
+  border: 1;
+  height: 5px;
+  width: 90%;
+}
+
 .section-header {
   color: #F4998D;
 }
@@ -26,6 +32,35 @@
   border-radius: 0px;
 }
 
+.timer-container {
+  box-shadow: 2px 2px 5px #C9ADA1;
+  padding-bottom: 10px;
+}
+
 .timer {
+  padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
+  font-size: 80px;
+}
+
+.new-task {
+  background-color: #EAE0CC;
+  z-index: 1;
+  width: 25%;
+
+  box-shadow: 2px 2px 5px grey;
+
+  position: absolute;
+  left: 37.5%;
+  top: 10%;
+}
+
+.new-task-title {
+  color: #F44E3F;
+}
+
+.new-task-field {
+  margin-top: 7.5px;
+  margin-bottom: 7.5px;
 }
