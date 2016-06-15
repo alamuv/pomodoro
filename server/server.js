@@ -1,9 +1,9 @@
-const mongoose = require(__dirname + '/config/dbConfig.js');
+const mongoose = require('server/config/dbConfig.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
-const config = require(__dirname + '/config/serverConfig');
-const router = require(__dirname + '/routers/router.js');
+const config = require('server/config/serverConfig');
+const router = require('server/routers/router.js');
 const app = express();
 
 app.use('/', express.static('dist'));

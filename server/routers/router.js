@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const requestHandlers = require(__dirname + '/requestHandlers/requestHandlers.js');
-const authHandlers = require(__dirname + '/requestHandlers/authHandlers.js')
+const requestHandlers = require('server/requestHandlers/requestHandlers.js');
+const authHandlers = require('server/requestHandlers/authHandlers.js')
 
 router.get('/api/tasks', requestHandlers.getTasks);
 

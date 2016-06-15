@@ -1,4 +1,4 @@
-const User = require(__dirname + '/models/User.js');
+const User = require('server/models/User.js');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
