@@ -39,13 +39,14 @@ currentTask.controller('currentTaskController', function ($scope, $rootScope, ht
     if ($scope.currentTask !== undefined) {
       // Sends currentTask back to the taskListController, where it will be added back to the task list
       $rootScope.$broadcast('unstageTask', $scope.currentTask);
-      // Sends updated pomodoro number to timer
-      $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
     }
     // Sets the clicked task as the current task
     $scope.currentTask = task;
     // Resets timer
     $rootScope.$broadcast('resetTimer');
+
+    // Sends updated pomodoro number to timer
+    if ($scope.currentTask.pomodoros !== undefined) $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
   };
   $rootScope.$on('stageTask', stageTask);
 
