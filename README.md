@@ -18,7 +18,7 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
 - **Node.js/Express**
   - Javascript's eventloop allows Node.js to handle API requests and DB reads/write asynchronously. This is very useful for API servers that need to handle frequent requests from the client.
   - NPM provides a robust package ecosystem that allow developers to easily add additional functionality. Packages used in this project include bcrypt, body-parser, cookie-parser, and mongoose.
-  - **Note:** for apps that require significant 'heavy lifting' on the backend (e.g., analysis of large datasets), Node.js may not be the best option. This is because JavaScript is single-threaded and, as a result, a Node.js server can get held up by slow synchronous tasks.
+  - **Note:** for apps that require significant 'heavy lifting' on the backend (e.g., analysis of large datasets), Node.js may not be the best option. This is because JavaScript is single-threaded and, as a result, a Node.js server can get held up by slow synchronous tasks. For a simple to-do list app, this is not an issue.
 - **AngularJS**
   - AngularJS' use of two-way databinding allows for highly interactive UIs where user input is required frequently. This works well for a to-do list app that requires regular creation/update/deletion of tasks by the user.
   - **Note:** For apps that require more significant DOM updates or have more complex state, React/Redux may be a better option due to (1) React's use of a Virtual DOM and (2) Redux's preference for immutable state.
