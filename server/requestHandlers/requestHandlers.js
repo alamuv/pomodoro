@@ -9,6 +9,8 @@ const getUserName = (sessionId) => {
     }, (error, users) => {
       if (error) {
         reject(error);
+      } else if (users.length === 0) {
+        resolve(false);
       } else {
         resolve(users[0].username);
       }
@@ -20,14 +22,19 @@ const getTasks = (request, response) => {
   const sessionId = request.cookies.sessionId;
   getUserName(sessionId)
     .then((username) => {
-      Task.find({ username }, (error, tasks) => {
-        if (error) {
-          console.log('Error: Could not get tasks from database', error);
-          response.status(500).json();
-        } else {
-          response.status(200).json(tasks);
-        }
-      });
+      // If username is not valid, responds with 401
+      if (username === false) {
+        response.status(401).json({ status: 'Unauthorized' });
+      } else {
+        Task.find({ username }, (error, tasks) => {
+          if (error) {
+            console.log('Error: Could not get tasks from database', error);
+            response.status(500).json();
+          } else {
+            response.status(200).json(tasks);
+          }
+        });
+      }
 
     })
     .catch((error) => {
@@ -40,7 +47,10 @@ const postTask = (request, response) => {
   const sessionId = request.cookies.sessionId;
   getUserName(sessionId)
     .then((username) => {
-      if (request.body.description === undefined || request.body.pomodoros === undefined || request.body.name === undefined) {
+      // If username is not valid, responds with 401
+      if (username === false) {
+        response.status(401).json({ status: 'Unauthorized' });
+      } else if (request.body.description === undefined || request.body.pomodoros === undefined || request.body.name === undefined) {
         response.status(400).json({
           status: 'Invalid task object'
         });
@@ -66,35 +76,49 @@ const postTask = (request, response) => {
 };
 
 const putTask = (request, response) => {
-  if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
-    response.status(400).json({ status: 'Invalid id' });
-  } else {
-    Task.findByIdAndUpdate(request.params.id, request.body, (error, task) => {
-      if (error) {
-        console.log('Error: could not update task', error);
-        response.status(500).json();
-      } else if (!task) {
+  const sessionId = request.cookies.sessionId;
+  getUserName(sessionId)
+    .then((username) => {
+      // If username is not valid, responds with 401
+      if (username === false) {
+        response.status(401).json({ status: 'Unauthorized' });
+      } else if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
         response.status(400).json({ status: 'Invalid id' });
       } else {
-        response.status(200).json({ status: 'Success', id: task.id });
+        Task.findByIdAndUpdate(request.params.id, request.body, (error, task) => {
+          if (error) {
+            console.log('Error: could not update task', error);
+            response.status(500).json();
+          } else if (!task) {
+            response.status(400).json({ status: 'Invalid id' });
+          } else {
+            response.status(200).json({ status: 'Success', id: task.id });
+          }
+        });
       }
     });
-  }
 };
 
 const deleteTask = (request, response) => {
-  if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
-    response.status(400).json({ status: 'Invalid id' });
-  } else {
-    Task.remove({ _id: request.params.id }, (error) => {
-      if (error) {
-        console.log('Error: Could not delete task ${taskId}', error);
-        response.status(500).json();
+  const sessionId = request.cookies.sessionId;
+  getUserName(sessionId)
+    .then((username) => {
+      // If username is not valid, responds with 401
+      if (username === false) {
+        response.status(401).json({ status: 'Unauthorized' });
+      } else if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
+        response.status(400).json({ status: 'Invalid id' });
       } else {
-        response.status(200).json({ status: 'Success' });
+        Task.remove({ _id: request.params.id }, (error) => {
+          if (error) {
+            console.log('Error: Could not delete task ${taskId}', error);
+            response.status(500).json();
+          } else {
+            response.status(200).json({ status: 'Success' });
+          }
+        })
       }
-    })
-  }
+    });
 };
 
 module.exports = {
