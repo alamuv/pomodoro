@@ -1,6 +1,6 @@
-const Task = require('./models/task.js');
-const User = require('./requestHandlers/authHandlers.js').User;
-const mongoose = require('./config/dbConfig.js');
+const Task = require('../models/task.js');
+const User = require('./authHandlers.js').User;
+const mongoose = require('../config/dbConfig.js');
 
 const getUserName = (sessionId) => {
   return new Promise((resolve, reject) => {
