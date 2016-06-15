@@ -13,7 +13,7 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
 - **MongoDB:**
   - Lack of relational data eliminates one of the primary advantages of SQL databaes (E.g., ability to do complex joins)
   - Strong integration with Node.js/Express via Mongoose
-  - Schemaless design allows for flexibility if the definition of a 'task' or pomodoro changes in the future
+  - Schemaless design allows for flexibility during development
   - **Note:** A major downside of MongoDB, aside from it's inability to handle relational data, is that it is not ACID compliant. As such, many of the features around data integrity that are commonplace with SQL databases may not be present in MongoDB. That being said, for applications that don't require the highest levels of data integrity (e.g., a to-do list app), the benefits of MongoDB will often outweight the downsides.
 - **Node.js/Express**
   - Javascript's eventloop allows Node.js to handle API requests and DB reads/write asynchronously.
