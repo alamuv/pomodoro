@@ -4,16 +4,11 @@ var timer = angular.module('timer', []);
 
 timer.controller('timerController', function ($scope, $rootScope, $timeout) {
 
-  $scope.showPomodoroAlert = false;
-  var togglePomodoroCompleteAlert = function togglePomodoroCompleteAlert() {
-    $scope.showPomodoroAlert = !$scope.showPomodoroAlert;
-  };
+  /*
+   * The below variables control how the timer operates and how it is displayed
+   */
 
-  $scope.showCompleteAlert = false;
-  var toggleTaskCompleteAlert = function toggleTaskCompleteAlert() {
-    $scope.showCompleteAlert = !$scope.showCompleteAlert;
-  };
-  // Timer settings
+  // Default length of task and break
   $scope.timerSettings = {
     taskTime: 25,
     breakTime: 5
@@ -28,11 +23,6 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
   $scope.isPaused = true;
   // Denotes whether currently in a break
   $scope.isBreak = false;
-  // Tracks pomodoros left on staged task
-  var currentPomodoros = void 0;
-  $rootScope.$on('updatePomodoros', function (event, pomodoros) {
-    currentPomodoros = pomodoros;
-  });
 
   // Toggles the timer on/off
   $scope.toggleTimer = function () {
@@ -55,6 +45,10 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
     }
   };
 
+  /*
+   * The below 2 functions convert the time into a string that is displayed on the page
+   */
+
   // Converts minutes to a string
   var minsToString = function minsToString() {
     var mins = Math.floor($scope.timeLeft).toString().length > 1 ? Math.floor($scope.timeLeft).toString() : '0' + Math.floor($scope.timeLeft).toString();
@@ -67,25 +61,43 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
     $scope.seconds = secs;
   };
 
-  // Switches to break timer when pomodoros is over
+  /*
+   * The below functions determine what happens when the timer reaches 0 seconcds
+   */
+
+  // Switches to break timer when pomodoro is over
   var switchToBreak = function switchToBreak() {
-    $scope.timeLeft = $scope.timerSettings.breakTime;
     $scope.isBreak = true;
+
+    // Sets the timer to the break duration (Default 5min)
+    $scope.timeLeft = $scope.timerSettings.breakTime;
+
+    // Reduces the number of pomodoros on the task by 1
     $rootScope.$broadcast('reduceCurrentPomodoros');
+
     // Shows pomodoro complete alert box and hides it after 1500ms
     togglePomodoroCompleteAlert();
     $timeout(togglePomodoroCompleteAlert, 1500);
   };
+
   // Switches to pomodoro timer when break is over
   var switchToTask = function switchToTask() {
-    $scope.timeLeft = $scope.timerSettings.taskTime;
     $scope.isBreak = false;
+
+    // Sets the timer to the task/pomodoro duration (Default 25min)
+    $scope.timeLeft = $scope.timerSettings.taskTime;
   };
+
   // Suspends timer when there are no more pomodoros left in the task
   var endTask = function endTask() {
-    $rootScope.$broadcast('deleteCurrentTask');
+    // Pauses the timer
     $scope.isPaused = true;
+
+    // Deletes the task that was just completed
+    $rootScope.$broadcast('deleteCurrentTask');
+
     $scope.resetTimer();
+
     // Shows task complete alert box and hides it after 1500ms
     toggleTaskCompleteAlert();
     $timeout(toggleTaskCompleteAlert, 1500);
@@ -107,5 +119,23 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
       secsToString();
     }
   };
+
+  // Shows/hides the 'Pomodoro complete' message
+  $scope.showPomodoroAlert = false;
+  var togglePomodoroCompleteAlert = function togglePomodoroCompleteAlert() {
+    $scope.showPomodoroAlert = !$scope.showPomodoroAlert;
+  };
+
+  // Shows/hides the 'Task complete' message (task is complete when all of its pomodoros are complete)
+  $scope.showCompleteAlert = false;
+  var toggleTaskCompleteAlert = function toggleTaskCompleteAlert() {
+    $scope.showCompleteAlert = !$scope.showCompleteAlert;
+  };
+
+  // Tracks pomodoros left on the currently staged task
+  var currentPomodoros = void 0;
+  $rootScope.$on('updatePomodoros', function (event, pomodoros) {
+    currentPomodoros = pomodoros;
+  });
 });
 //# sourceMappingURL=timercontroller.js.map

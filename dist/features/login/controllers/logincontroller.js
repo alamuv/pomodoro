@@ -4,6 +4,7 @@ angular.module('login', []).controller('loginController', function ($scope, $loc
   $scope.username = '';
   $scope.password = '';
 
+  // Signs up/logs in the user
   $scope.authorize = function () {
     authFactory.authorizeUser($scope.username, $scope.password).then(function (response) {
       $location.path('/pomodoros');

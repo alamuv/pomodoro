@@ -2,6 +2,7 @@ const Task = require('../models/task.js');
 const User = require('./authHandlers.js').User;
 const mongoose = require('../config/dbConfig.js');
 
+// Gets username from sessionID
 const getUserName = (sessionId) => {
   return new Promise((resolve, reject) => {
     User.find({
@@ -20,6 +21,7 @@ const getUserName = (sessionId) => {
 
 const getTasks = (request, response) => {
   const sessionId = request.cookies.sessionId;
+  // Checks for username in DB based on sessionID
   getUserName(sessionId)
     .then((username) => {
       // If username is not valid, responds with 401
@@ -45,6 +47,7 @@ const getTasks = (request, response) => {
 
 const postTask = (request, response) => {
   const sessionId = request.cookies.sessionId;
+  // Checks for username in DB based on sessionID
   getUserName(sessionId)
     .then((username) => {
       // If username is not valid, responds with 401
@@ -57,6 +60,7 @@ const postTask = (request, response) => {
       } else {
         request.body.username = username;
         const newTask = new Task(request.body);
+        // Saves the new task to the database
         newTask.save((error, task) => {
           if (error) {
             console.log('Error: Could not save new task to database')
@@ -77,14 +81,17 @@ const postTask = (request, response) => {
 
 const putTask = (request, response) => {
   const sessionId = request.cookies.sessionId;
+  // Checks for username in DB based on sessionID
   getUserName(sessionId)
     .then((username) => {
       // If username is not valid, responds with 401
       if (username === false) {
         response.status(401).json({ status: 'Unauthorized' });
       } else if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
+        // If task id is not valid, response with 400
         response.status(400).json({ status: 'Invalid id' });
       } else {
+        // Updates the task in the database
         Task.findByIdAndUpdate(request.params.id, request.body, (error, task) => {
           if (error) {
             console.log('Error: could not update task', error);
@@ -101,14 +108,17 @@ const putTask = (request, response) => {
 
 const deleteTask = (request, response) => {
   const sessionId = request.cookies.sessionId;
+  // Checks for username in DB based on sessionID
   getUserName(sessionId)
     .then((username) => {
       // If username is not valid, responds with 401
       if (username === false) {
         response.status(401).json({ status: 'Unauthorized' });
       } else if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
+        // If task id is not valid, response with 400
         response.status(400).json({ status: 'Invalid id' });
       } else {
+        // Deletes the task from the database
         Task.remove({ _id: request.params.id }, (error) => {
           if (error) {
             console.log('Error: Could not delete task ${taskId}', error);

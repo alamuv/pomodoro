@@ -27,7 +27,7 @@ taskList.controller('taskListController', function($scope, $rootScope, $timeout,
     $scope.tasks.splice(taskIndex, 1);
   };
 
-  // Adds a task back to the list
+  // Adds a task back to the task list
   const unstageTask = (event, task) => {
     $scope.tasks.push(task);
   }
@@ -56,10 +56,7 @@ taskList.controller('taskListController', function($scope, $rootScope, $timeout,
     $rootScope.$broadcast('editTask', task);
   };
 
-  /* Initializes the app on load by:
-   *  - Getting the user's tasks from ther server
-   *  - Staging the first task in the list
-   */
+  // Initializes the app on load by betting the user's tasks from ther server
   const init = () => {
     httpFactory.getTasks()
       .then((response) => {

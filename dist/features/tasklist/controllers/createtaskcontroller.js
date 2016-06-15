@@ -4,7 +4,7 @@ var createTask = angular.module('createTask', []);
 
 createTask.controller('createTaskController', function ($scope, $rootScope, httpFactory) {
 
-  // Determines whether create task modal should be shown
+  // Determines whether create task modal is visible
   $scope.isCreatingTask = false;
 
   // Store newly created task
@@ -23,8 +23,9 @@ createTask.controller('createTaskController', function ($scope, $rootScope, http
   $scope.submitTask = function () {
     // Posts task to the server
     httpFactory.postTask($scope.newTask).then(function (response) {
-      // Adds the id (from server response) to the new task and pushes it to the new task list
+      // Adds the id (from server response) to the new task
       $scope.newTask._id = response.data.id;
+      // Adds new task to the task list
       $rootScope.$broadcast('unstageTask', $scope.newTask);
       // Resets the new task object
       $scope.newTask = {
@@ -32,6 +33,7 @@ createTask.controller('createTaskController', function ($scope, $rootScope, http
         description: '',
         pomodoros: 1
       };
+      // Hides the creation modal
       $scope.toggleIsCreatingTask();
     });
   };

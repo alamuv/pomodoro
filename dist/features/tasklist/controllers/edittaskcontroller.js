@@ -4,7 +4,7 @@ var editTask = angular.module('editTask', []);
 
 editTask.controller('editTaskController', function ($scope, $rootScope, httpFactory) {
 
-  // Determines whether edit task modal should be shown
+  // Determines whether edit task modal is visible
   $scope.isEditingTask = false;
 
   // Stores task being edited
