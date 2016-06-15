@@ -8,9 +8,16 @@ module.exports = (grunt) => {
         sourceMap: true
       },
       dist: {
-        files: {
+        files: [{
+          expand: true,
+          cwd: 'client/features',
+          src: ['**/*.js'],
+          dest: 'dist/features',
+          ext: '.js'
+        },
+        {
           "dist/app.js": "client/app.js"
-        }
+        }]
       }
     }
   });

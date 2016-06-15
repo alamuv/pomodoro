@@ -6,6 +6,7 @@ const config = require('./config/serverConfig');
 const router = require('./routers/router.js');
 const app = express();
 
+app.use('/', express.static('dist'));
 app.use('/', express.static('client'));
 
 app.use(bodyParser.json());
