@@ -28,6 +28,7 @@ This application makes use of a simple REST API. The API has 4 main routes for g
 ## Serverside unit tests
 This repository includes basic serverside unit tests.
 - Run `npm test`
+
 ## Additional notes
 - This application does not make use of SSL when sending usernames and passwords to the server. For a production-grade application, this would, obviously be a major security concern. However, I felt it was a reasonable compromise for a 'proof-of-concept' app
 - A significant amount of ES6 has been used in writing this app. For the backend, ensure that you are running `Node v6.1.0`. For the frontend, run `grunt` (ensure you have the `grunt-cli` installed) after making any changes (the transpiled versions of the frontend javascript files will be saved in the `dist` folder)
