@@ -16,8 +16,8 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
   - Schemaless design allows for flexibility during development
   - **Note:** A major downside of MongoDB, aside from it's inability to handle relational data, is that it is not ACID compliant. As such, many of the features around data integrity that are commonplace with SQL databases may not be present in MongoDB. That being said, for applications that don't require the highest levels of data integrity (e.g., a to-do list app), the benefits of MongoDB will often outweight the downsides.
 - **Node.js/Express**
-  - Javascript's eventloop allows Node.js to handle API requests and DB reads/write asynchronously.
-  - NPM provides a robus package ecosystem that prevents one from 'reinventing the wheel'. Packages used in this project include bcrypt, body-parser, cookie-parser, and mongoose.
+  - Javascript's eventloop allows Node.js to handle API requests and DB reads/write asynchronously. This is very useful for API servers that need to handle frequent requests from the client.
+  - NPM provides a robust package ecosystem that prevents one from 'reinventing the wheel'. Packages used in this project include bcrypt, body-parser, cookie-parser, and mongoose.
   - **Note:** for apps that require significant 'heavy lifting' on the backend, Node.js may not be the best options. However, for simple API servers, such as the one used here, Node.js works very well
 - **AngularJS**
   - AngularJS' use of two-way databinding allows for highly interactive UIs where user input is required frequently. This works well for a to-do list app that requires regular creation/update/deletion of tasks by the user.
