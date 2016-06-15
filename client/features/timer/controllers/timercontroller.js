@@ -1,6 +1,16 @@
 const timer = angular.module('timer', []);
 
 timer.controller('timerController', function($scope, $rootScope, $timeout) {
+
+  $scope.showPomodoroAlert = false;
+  const togglePomodoroCompleteAlert = () => {
+    $scope.showPomodoroAlert = !$scope.showPomodoroAlert;
+  }
+  
+  $scope.showCompleteAlert = false;
+  const toggleTaskCompleteAlert = () => {
+    $scope.showCompleteAlert = !$scope.showCompleteAlert;
+  };
   // Timer settings
   $scope.timerSettings = {
    taskTime: 25,
@@ -60,6 +70,9 @@ timer.controller('timerController', function($scope, $rootScope, $timeout) {
     $scope.timeLeft = $scope.timerSettings.breakTime;
     $scope.isBreak = true;
     $rootScope.$broadcast('reduceCurrentPomodoros');
+    // Shows pomodoro complete alert box and hides it after 1500ms
+    togglePomodoroCompleteAlert();
+    $timeout(togglePomodoroCompleteAlert, 1500);
   };
   // Switches to pomodoro timer when break is over
   const switchToTask = () => {
@@ -71,6 +84,9 @@ timer.controller('timerController', function($scope, $rootScope, $timeout) {
     $rootScope.$broadcast('deleteCurrentTask');
     $scope.isPaused = true;
     $scope.resetTimer();
+    // Shows task complete alert box and hides it after 1500ms
+    toggleTaskCompleteAlert();
+    $timeout(toggleTaskCompleteAlert, 1500);
   }
   // Decrements the timer by 1 second
   const decrementTimer = () => {

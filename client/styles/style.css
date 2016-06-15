@@ -123,3 +123,15 @@ hr {
   height: 20px;
   width: 20px;
 }
+
+.task-alert {
+  z-index: 1; 
+  position: absolute;
+  left: 25%;
+  bottom: 25%;
+  width: 50%;
+  text-align: center;
+  border-width: 1px;
+  box-shadow: 2px 2px 5px #C9ADA1;
+}
+

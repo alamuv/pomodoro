@@ -26,4 +26,12 @@
       {{ isPaused ? 'Start' : 'Pause'}}
     </div>
   </div>
+
+  <div class="alert alert-danger task-alert" ng-show="showPomodoroAlert">
+    <h4><strong>Pomodoro complete!</strong></h4>
+  </div>
+
+  <div class="alert alert-danger task-alert" ng-show="showCompleteAlert">
+    <h4><strong>Task complete!</strong></h4>
+  </div>
 </div>
