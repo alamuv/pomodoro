@@ -1,4 +1,4 @@
-const mongoose = require('.config/dbConfig.js');
+const mongoose = require('./config/dbConfig.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
