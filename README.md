@@ -1,5 +1,7 @@
 # README
 
+A deployed version of this app can be found at [[pomodoro-rftd.herokuapp.com]].
+
 ## Getting started
 **Note:** Ensure that you are running `Node v6.1.0` as the code uses some ES6 syntax
 - Run `npm install`
