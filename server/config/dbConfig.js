@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/pomodoro');
+mongoose.connect(process.env.MONGODB_URI+'/pomodoro');
 
 const db = mongoose.connection;
 

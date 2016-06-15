@@ -44,5 +44,10 @@ currentTask.controller('currentTaskController', function($scope, $rootScope, htt
     $rootScope.$broadcast('resetTimer');
     // Sends updated pomodoro number to timer
   };
-  $rootScope.$on('stageTask', stageTask)
+  $rootScope.$on('stageTask', stageTask);
+
+  $scope.editTask = ($event) => {
+    $event.stopPropagation();
+    $rootScope.$broadcast('editTask', $scope.currentTask);
+  }
 });

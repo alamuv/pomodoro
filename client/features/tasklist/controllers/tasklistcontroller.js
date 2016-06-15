@@ -47,7 +47,7 @@ taskList.controller('taskListController', function($scope, $rootScope, $timeout,
   }
 
   // Shows the create event modal
-  $scope.toggleIsCreatingTask = () => {
+  $scope.createTask = () => {
     $rootScope.$broadcast('createTask');
   };
   // Shows the edit task modal
