@@ -25,7 +25,7 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
 
 ## Architecure
 This application makes use of a simple REST API. The API has 4 main routes for getting, creating, updating, and deleting tasks. In addition, there are also separate routes for authentication.
-![Architecture Diagram](http://i.imgur.com/1y7sAZd.png)
+![Architecture Diagram](http://i.imgur.com/bFJ7yw9.png)
 
 ## Serverside unit tests
 This repo includes basic serverside unit tests which run on  mocha/chai.
