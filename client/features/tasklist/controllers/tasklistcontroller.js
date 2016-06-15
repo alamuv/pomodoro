@@ -64,7 +64,6 @@ taskList.controller('taskListController', function($scope, $rootScope, $timeout,
     httpFactory.getTasks()
       .then((response) => {
         $scope.tasks = response.data;
-        $scope.stageTask($scope.tasks[0]);
       });
   };
   init();
