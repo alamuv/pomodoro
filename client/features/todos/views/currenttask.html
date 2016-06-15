@@ -1,4 +1,4 @@
-<div class="col-sm-5 timer-container" ng-switch="currentTask">
+<div class="col-sm-5 timer-container" ng-switch="currentTask" ng-controller="currentTaskController">
   <div class="row">
     <div class="col-sm-12">
       <h1 class="section-header">Current Task</h1>
@@ -12,9 +12,10 @@
   </div>
   <div ng-switch-default>
     <div class="row current-task">
-      <div class="row" ng-click="deleteTask(currentTask, $event)">
+      <div class="row">
         <div class="col-sm-12">
-          <img class="delete" src="../../../assets/img/trash.png"/>
+          <img class="icon" src="assets/img/trash.png" ng-click="deleteCurrentTask($event)"/>
+          <img class="icon" src="assets/img/edit.png"/>
         </div>
       </div>
       <div class="row">
@@ -32,10 +33,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-danger" ng-click="subtractPomodoros(currentTask, $event)">
+            <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-danger" ng-click="subtractPomodoros($event)">
               -
             </div>
-            <div class="col-sm-1 no-padding btn btn-success" ng-click="addPomodoros(currentTask, $event)">
+            <div class="col-sm-1 no-padding btn btn-success" ng-click="addPomodoros($event)">
               +
             </div>
           </div>
@@ -44,16 +45,7 @@
   </div>
   <hr>
 
-
-  <div class="row">
-    <div class="col-sm-12 timer">
-      <p>{{minutes}}:{{seconds}}</p>
-    </div>
-
-    <div class="col-sm-4 col-sm-offset-4 btn btn-success" ng-click="toggleTimer()">
-      {{ isPaused ? 'Start' : 'Pause'}}
-    </div>
-  </div>
+  <ng-include src="'features/todos/views/timer.html'"></ng-include>
 
   </div>
 </div>

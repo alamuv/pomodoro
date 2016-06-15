@@ -1,4 +1,4 @@
-<div class="col-sm-5 tasks-container col-sm-offset-1" ng-switch="tasks.length">
+<div class="col-sm-5 tasks-container col-sm-offset-1" ng-switch="tasks.length" ng-controller="todosController">
   <div class="row">
     <div class="col-sm-6">
       <h1 class="section-header">My Tasks</h1>
@@ -17,9 +17,10 @@
   </div>
   <div class="row task tile" ng-repeat="task in tasks track by $index" ng-click="stageTask(task)" ng-switch-default>
     <div class="col-sm-12">
-      <div class="row" ng-click="deleteTask(task, $event)">
+      <div class="row">
         <div class="col-sm-12 row-delete">
-          <img class="delete" src="../../../assets/img/trash.png"/>
+          <img class="icon" src="assets/img/trash.png" ng-click="deleteTask(task, $event)"/>
+          <img class="icon" src="assets/img/edit.png"/>
         </div>
       </div>
       <div class="row">
@@ -50,5 +51,4 @@
       </div>
     </div>
   </div>
-
 </div>

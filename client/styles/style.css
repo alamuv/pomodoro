@@ -61,7 +61,7 @@ hr {
 }
 
 .timer {
-  padding-top: 30px;
+  padding-top: 0px;
   padding-bottom: 30px;
   text-align: center;
   font-size: 80px;
@@ -71,12 +71,14 @@ hr {
   background-color: #EAE0CC;
   z-index: 1;
   width: 25%;
+  padding-bottom: 15px;
 
   box-shadow: 2px 2px 5px grey;
 
   position: absolute;
   left: 37.5%;
   top: 10%;
+
 }
 
 .new-task-title {
@@ -103,7 +105,7 @@ hr {
   padding: 0px;
 }
 
-.delete {
+.icon {
   height: 20px;
   width: 20px;
 }

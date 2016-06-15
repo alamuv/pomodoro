@@ -1,0 +1,29 @@
+<div ng-controller="timerController">
+  <div class="row">
+    <div class="col-sm-2">
+      Pomodoro (mins):
+    </div>
+    <div class="col-sm-2">
+      <input class="form-control" placeholder="Min" resize="none" ng-model="timerSettings.taskTime">
+    </div>
+    <div class="col-sm-2">
+      Break (mins):
+    </div>
+    <div class="col-sm-2">
+      <input class="form-control" placeholder="Min" resize="none" ng-model="timerSettings.breakTime">
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-warning" ng-click="resetTimer()">Reset Timer</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 timer">
+      <p>{{minutes}}:{{seconds}}</p>
+    </div>
+
+    <div class="col-sm-4 col-sm-offset-4 btn btn-success" ng-click="toggleTimer()">
+      {{ isPaused ? 'Start' : 'Pause'}}
+    </div>
+  </div>
+</div>

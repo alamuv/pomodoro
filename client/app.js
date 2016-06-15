@@ -1,5 +1,8 @@
 angular.module('pomodoro', [
   'login',
+  'timer',
+  'currentTask',
+  'createTask',
   'todos',
   'ngRoute',
   'http',
@@ -14,15 +17,14 @@ angular.module('pomodoro', [
       controller: 'loginController'
     })
     .when('/pomodoros', {
-      templateUrl: 'features/todos/views/todos.html',
-      controller: 'todosController'
+      templateUrl: 'features/todos/views/todos.html'
     })
     .otherwise({
       redirectTo: '/'
     });
 })
 .run(($rootScope, $location, $http) => {
-  // Redirects to login page if there is no session id
+  // Redirects to login page if there is no valid session id
   $rootScope.$on('$routeChangeStart', (next, event, current) => {
     $http.get('/checksession')
       .then((response) => {

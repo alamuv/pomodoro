@@ -1,9 +1,9 @@
-<div class="row new-task" ng-show="isCreatingTask" ng-controller="createTaskController">
+<div class="row new-task" ng-show="isEditingTask">
   <div class="col-sm-12">
     <div class="row">
       <img class="modal-exit" src="../../../assets/img/trash.png" ng-click="toggleIsCreatingTask()"/>
       <div class="col-sm-12">
-        <h2 class="new-task-title">Create new task</h2>
+        <h2 class="new-task-title">Edit task</h2>
       </div>
     </div>
     <div class="row new-task-field">
@@ -46,7 +46,7 @@
 
     <div class="row new-task-field">
       <div class="col-sm-3 col-sm-offset-9">
-        <button class="btn btn-success" ng-click="submitTask()">Submit</button>
+        <button class="btn btn-success" ng-click="updateTask()">Submit</button>
       </div>
     </div>
 
