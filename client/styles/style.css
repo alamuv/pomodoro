@@ -135,3 +135,12 @@ hr {
   box-shadow: 2px 2px 5px #C9ADA1;
 }
 
+.btn-submit-container {
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .timer-settings {
+    display: none;
+  }
+}

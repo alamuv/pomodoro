@@ -6,30 +6,30 @@
         <h2 class="new-task-title">Create new task</h2>
       </div>
     </div>
-    <div class="row new-task-field">
-      <div class="col-sm-3">
+    <div class="row">
+      <div class="col-sm-4 new-task-label">
         Name:
       </div>
-      <div class="col-sm-9">
+      <div class="col-sm-8">
         <input type="text" class="form-control" placeholder="Name" ng-model="newTask.name">
       </div>
     </div>
 
     <div class="row new-task-field">
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         Description:
       </div>
-      <div class="col-sm-9">
+      <div class="col-sm-8">
         <textarea class="form-control" rows="1" placeholder="Description" resize="none" maxlength="50" ng-model="newTask.description"></textarea>
       </div>
     </div>
 
     <div class="row new-task-field">
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         Pomodoros:
       </div>
-      <div class="col-sm-9">
-        <select class="form-control" placeholder="pomodoros" ng-model="newTask.pomodoros">
+      <div class="col-sm-8">
+        <select class="form-control" placeholder="Pomodoros" ng-model="newTask.pomodoros">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="row new-task-field">
-      <div class="col-sm-3 col-sm-offset-9">
+      <div class="col-sm-4">
         <button class="btn btn-success" ng-click="submitTask()">Submit</button>
       </div>
     </div>
