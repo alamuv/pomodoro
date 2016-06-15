@@ -24,7 +24,7 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
   - **Note:** For apps that require more significant DOM updates or have more complex state, React/Redux may be a better option due to (1) React's use of a Virtual DOM and (2) Redux's preference for immutable state.
 
 ## Architecure
-This application makes use of a simple REST API. The API has 4 main routes for getting, creating, updating, and deleting tasks. In addition, there server also has separate routes for authentication.
+This application makes use of a simple REST API. The API has 4 main routes for getting, creating, updating, and deleting tasks. In addition, the server also has separate routes for authentication.
 ![Architecture Diagram](http://i.imgur.com/bFJ7yw9.png) 
 
 ## Serverside unit tests
