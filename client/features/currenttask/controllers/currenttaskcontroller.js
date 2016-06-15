@@ -33,17 +33,16 @@ currentTask.controller('currentTaskController', function($scope, $rootScope, htt
 
   // Change the 'current task'
   const stageTask = (event, task) => {
-    // Sends currentTask back to the todosController
+    // Sends currentTask back to the taskListController
     if ($scope.currentTask !== undefined) {
       $rootScope.$broadcast('unstageTask', $scope.currentTask);
+      $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
     }
     // Sets the clicked task as the current task, removes it from the task list
     $scope.currentTask = task;
     // Resets timer
     $rootScope.$broadcast('resetTimer');
     // Sends updated pomodoro number to timer
-    $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
   };
   $rootScope.$on('stageTask', stageTask)
-
 });

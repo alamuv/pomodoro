@@ -3,7 +3,8 @@ angular.module('pomodoro', [
   'timer',
   'currentTask',
   'createTask',
-  'todos',
+  'editTask',
+  'taskList',
   'ngRoute',
   'http',
   'auth',
@@ -17,7 +18,7 @@ angular.module('pomodoro', [
       controller: 'loginController'
     })
     .when('/pomodoros', {
-      templateUrl: 'features/todos/views/todos.html'
+      templateUrl: 'todos.html'
     })
     .otherwise({
       redirectTo: '/'

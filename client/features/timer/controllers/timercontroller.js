@@ -70,6 +70,7 @@ timer.controller('timerController', function($scope, $rootScope, $timeout) {
   const endTask = () => {
     $rootScope.$broadcast('deleteCurrentTask');
     $scope.isPaused = true;
+    $scope.resetTimer();
   }
   // Decrements the timer by 1 second
   const decrementTimer = () => {

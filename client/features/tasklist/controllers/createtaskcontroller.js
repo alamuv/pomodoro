@@ -2,12 +2,6 @@ const createTask = angular.module('createTask', []);
 
 createTask.controller('createTaskController', function ($scope, $rootScope, httpFactory) {
 
-  /*
-   * The below functions are used for creating tasks:
-   *  - toggleIsCreatingTask: Shows/hides the task creation modal
-   *  - submitTask: Sends the the new task to the server, where it will be stored
-   */
-
   // Determines whether create task modal should be shown
   $scope.isCreatingTask = false;
 

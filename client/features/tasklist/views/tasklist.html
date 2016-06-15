@@ -1,4 +1,4 @@
-<div class="col-sm-5 tasks-container col-sm-offset-1" ng-switch="tasks.length" ng-controller="todosController">
+<div class="col-sm-5 tasks-container col-sm-offset-1" ng-switch="tasks.length" ng-controller="taskListController">
   <div class="row">
     <div class="col-sm-6">
       <h1 class="section-header">My Tasks</h1>
@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-sm-12 row-delete">
           <img class="icon" src="assets/img/trash.png" ng-click="deleteTask(task, $event)"/>
-          <img class="icon" src="assets/img/edit.png"/>
+          <img class="icon" src="assets/img/edit.png" ng-click="editTask(task, $event)"/>
         </div>
       </div>
       <div class="row">

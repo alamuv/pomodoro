@@ -1,0 +1,53 @@
+<div class="col-sm-5 timer-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="section-header">Current Task</h1>
+    </div>
+  </div>
+  <hr>
+  <div ng-switch="currentTask" ng-controller="currentTaskController">
+    <div class="row" ng-switch-when="undefined">
+      <div class="col-sm-12">
+        <h4 class="no-task-msg">Please select a task from My Tasks</h4>
+      </div>
+    </div>
+    <div ng-switch-default>
+      <div class="row current-task">
+        <div class="row">
+          <div class="col-sm-12">
+            <img class="icon" src="assets/img/trash.png" ng-click="deleteCurrentTask($event)"/>
+            <img class="icon" src="assets/img/edit.png"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <h3>{{currentTask.name}}</h3>
+            <h6>{{currentTask.description}}</h6>
+          </div>
+          <div class="col-sm-4">
+            <div class="row">
+              <div class="col-sm-2 col-sm-offset-6 no-padding">
+                <h6>{{currentTask.pomodoros}}x</h6>
+              </div>
+              <div class="col-sm-4 no-padding">
+                <img src="../../../assets/img/pomodoro.png" height="30px"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1 col-sm-offset-8 no-padding btn btn-danger" ng-click="subtractPomodoros($event)">
+                -
+              </div>
+              <div class="col-sm-1 no-padding btn btn-success" ng-click="addPomodoros($event)">
+                +
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <hr>
+  <ng-include src="'features/timer/views/timer.html'"></ng-include>
+
+</div>

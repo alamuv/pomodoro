@@ -1,6 +1,6 @@
-const todos = angular.module('todos', []);
+const taskList = angular.module('taskList', []);
 
-todos.controller('todosController', function($scope, $rootScope, $timeout, httpFactory) {
+taskList.controller('taskListController', function($scope, $rootScope, $timeout, httpFactory) {
 
   // Stores tasks
   $scope.tasks;
@@ -41,16 +41,20 @@ todos.controller('todosController', function($scope, $rootScope, $timeout, httpF
     httpFactory.deleteTask(task._id)
       .then((response) => {
         // Removes the task from the view
-        $scope.tasks.forEach((curr, index, array) => {
-          if (curr._id === task._id) array.splice(index, 1);
-        });
+        const taskIndex = $scope.tasks.indexOf(task);
+        $scope.tasks.splice(taskIndex, 1);
       });
   }
 
   // Shows the create event modal
   $scope.toggleIsCreatingTask = () => {
     $rootScope.$broadcast('createTask');
-  }
+  };
+  // Shows the edit task modal
+  $scope.editTask = (task, $event) => {
+    $event.stopPropagation();
+    $rootScope.$broadcast('editTask', task);
+  };
 
   /* Initializes the app on load by:
    *  - Getting the user's tasks from ther server
