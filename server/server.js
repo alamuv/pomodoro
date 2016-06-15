@@ -2,8 +2,8 @@ const mongoose = require('./config/dbConfig.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
-const config = require('server/config/serverConfig');
-const router = require('server/routers/router.js');
+const config = require('./config/serverConfig.js');
+const router = require('./routers/router.js');
 const app = express();
 
 app.use('/', express.static('dist'));
