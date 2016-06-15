@@ -27,6 +27,10 @@ This project is built on the MEAN (MongoDB, Express, AngularJS, Node.js) stack. 
 This application makes use of a simple REST API. The API has 4 main routes for getting, creating, updating, and deleting tasks. In addition, the server also has separate routes for authentication.
 ![Architecture Diagram](http://i.imgur.com/bFJ7yw9.png) 
 
+## Example Usage
+
+![Pomodoro GIF](http://i.imgur.com/U5tty1l.gif)
+
 ## Serverside unit tests
 This repo includes basic serverside unit tests which run on  mocha/chai.
 - Run `npm test`
