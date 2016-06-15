@@ -24,7 +24,7 @@ angular.module('pomodoro', [
       redirectTo: '/'
     });
 })
-.run(($rootScope, $location, $http) => {
+.run(function ($rootScope, $location, $http) {
   // Redirects to login page if there is no valid session id
   $rootScope.$on('$routeChangeStart', (next, event, current) => {
     $http.get('/checksession')
