@@ -23,13 +23,13 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
   $scope.isPaused = true;
   // Denotes whether currently in a break
   $scope.isBreak = false;
-  // Start time
-  $scope.startTime;
+  // Last time the timer was decremented
+  $scope.lastCheckedTime;
 
   // Toggles the timer on/off
   $scope.toggleTimer = function () {
     if ($scope.isPaused && ($scope.isBreak && $scope.timeLeft === 5 || !$scope.isBreak && $scope.timeLeft === 25)) {
-      $scope.startTime = Date.now();
+      $scope.lastCheckedTime = Date.now();
     }
     $scope.isPaused = !$scope.isPaused;
     decrementTimer();
@@ -110,7 +110,9 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
   // Decrements the timer by 1 second
   var decrementTimer = function decrementTimer() {
     if (!$scope.isPaused) {
-      $scope.timeLeft -= (Date.now() - $scope.startTime) / 1000 / 60;
+      var now = Date.now();
+      $scope.timeLeft -= (now - $scope.lastCheckedTime) / 1000 / 60;
+      $scope.lastCheckedTime = now;
       // If last pomodoro, delete task
       if ($scope.timeLeft === 0 && currentPomodoros === 1 && $scope.isBreak === false) endTask();
       // If pomodoro complete, switch to break timer
@@ -118,7 +120,7 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
         // If break complete, switch to pomodoro timer
         else if ($scope.timeLeft === 0 && $scope.isBreak === true) switchToTask();
       // Queues additional call to decrementTimer
-      $timeout(decrementTimer, 1000);
+      $timeout(decrementTimer, 0);
       // Converts timeLeft to formatted minutes and seconds
       minsToString();
       secsToString();
