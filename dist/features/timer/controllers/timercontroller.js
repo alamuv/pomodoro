@@ -28,7 +28,7 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
 
   // Toggles the timer on/off
   $scope.toggleTimer = function () {
-    if ($scope.isPaused && ($scope.isBreak && $scope.timeLeft === 5 || !$scope.isBreak && $scope.timeLeft === 25)) {
+    if ($scope.isPaused && ($scope.isBreak && $scope.timeLeft === $scope.timerSettings.breakTime || !$scope.isBreak && $scope.timeLeft === $scope.timerSettings.taskTime)) {
       $scope.lastCheckedTime = Date.now();
     }
     $scope.isPaused = !$scope.isPaused;
@@ -49,6 +49,10 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
       secsToString();
     }
   };
+  $rootScope.$on('resetTimerForNewTask', function () {
+    $scope.isBreak = false;
+    $scope.resetTimer();
+  });
 
   /*
    * The below 2 functions convert the time into a string that is displayed on the page
@@ -76,7 +80,6 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
 
     // Sets the timer to the break duration (Default 5min)
     $scope.timeLeft = $scope.timerSettings.breakTime;
-
     // Reduces the number of pomodoros on the task by 1
     $rootScope.$broadcast('reduceCurrentPomodoros');
 
@@ -111,7 +114,7 @@ timer.controller('timerController', function ($scope, $rootScope, $timeout) {
   var decrementTimer = function decrementTimer() {
     if (!$scope.isPaused) {
       var now = Date.now();
-      $scope.timeLeft -= (now - $scope.lastCheckedTime) / 1000 / 60;
+      $scope.timeLeft = Math.max(0, $scope.timeLeft - (now - $scope.lastCheckedTime) / 1000 / 60);
       $scope.lastCheckedTime = now;
       // If last pomodoro, delete task
       if ($scope.timeLeft === 0 && currentPomodoros === 1 && $scope.isBreak === false) endTask();

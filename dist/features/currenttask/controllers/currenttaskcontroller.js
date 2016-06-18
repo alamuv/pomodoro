@@ -43,7 +43,7 @@ currentTask.controller('currentTaskController', function ($scope, $rootScope, ht
     // Sets the clicked task as the current task
     $scope.currentTask = task;
     // Resets timer
-    $rootScope.$broadcast('resetTimer');
+    $rootScope.$broadcast('resetTimerForNewTask');
 
     // Sends updated pomodoro number to timer
     if ($scope.currentTask !== undefined) $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
