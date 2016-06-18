@@ -46,7 +46,7 @@ currentTask.controller('currentTaskController', function ($scope, $rootScope, ht
     $rootScope.$broadcast('resetTimer');
 
     // Sends updated pomodoro number to timer
-    if ($scope.currentTask.pomodoros !== undefined) $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
+    if ($scope.currentTask !== undefined) $rootScope.$broadcast('updatePomodoros', $scope.currentTask.pomodoros);
   };
   $rootScope.$on('stageTask', stageTask);
 
